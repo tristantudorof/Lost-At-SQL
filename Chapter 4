@@ -1,0 +1,6 @@
+
+```sql
+SELECT *
+from crew
+where staff_name is  'Helga Sinclair'
+ ```
