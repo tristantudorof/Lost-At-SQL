@@ -1,5 +1,5 @@
 
-```sql
+
 
 /* 
 This is a comment (everything between the / * and * /). 
@@ -11,6 +11,12 @@ Check the tutorial (press (i) above) or the "hints" section for extra help.
 For this level: get the issues column from the table 'malfunctions'.
             
 */
-SELECT issues
-From malfunctions
+
+```sql
+
+SELECT
+issues
+From
+malfunctions
+
 ```
