@@ -1,2 +1,6 @@
-SELECT issues, fix
-From malfunctions
+```sql
+SELECT
+    issues, fix
+FROM
+    malfunctions;
+```
