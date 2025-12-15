@@ -18,3 +18,26 @@ This query allowed me to retrieve all issues from the malfunctions table.
 
 
 <img width="573" height="362" alt="Screenshot 2025-12-15 at 4 07 44 PM" src="https://github.com/user-attachments/assets/130da361-207f-417d-8641-be33a4c2cd0f" />
+
+
+<img width="489" height="508" alt="Screenshot 2025-12-15 at 4 13 58 PM" src="https://github.com/user-attachments/assets/033ab8dc-37d9-4c04-9434-2f9034af7b2e" />
+
+
+
+# Chapter 2 
+
+<img width="731" height="588" alt="Screenshot 2025-12-15 at 4 16 41 PM" src="https://github.com/user-attachments/assets/977c0e99-6108-4223-abd6-bb108b49fabf" />
+
+Using the "malfunctions" table again - get the issues and fix columns
+
+```sql
+SELECT
+issues, fix
+From
+ malfunctions
+ ```
+This query allowed me to retrieve both the issues and the fix columns from the malfunctions table.
+
+<img width="564" height="531" alt="Screenshot 2025-12-15 at 4 18 45 PM" src="https://github.com/user-attachments/assets/55ee3e4d-614b-4bfe-a1d4-da39f7735aae" />
+
+   
