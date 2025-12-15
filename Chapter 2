@@ -1,0 +1,2 @@
+SELECT issues, fix
+From malfunctions
