@@ -1,3 +1,6 @@
+
+```sql
+
 /* 
 This is a comment (everything between the / * and * /). 
 
@@ -10,3 +13,4 @@ For this level: get the issues column from the table 'malfunctions'.
 */
 SELECT issues
 From malfunctions
+```
