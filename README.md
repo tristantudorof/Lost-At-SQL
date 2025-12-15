@@ -47,6 +47,7 @@ This query allowed me to retrieve both the issues and the fix columns from the m
 
 <img width="982" height="620" alt="Screenshot 2025-12-15 at 4 24 41 PM" src="https://github.com/user-attachments/assets/9d3365d9-ab65-48e1-afb6-e422113b8ea2" />
 
+Selecting all columns from a table
 
 ```sql
 SELECT
@@ -54,12 +55,29 @@ SELECT
 From
 crew
  ```
-
+This query allowed me to retrieve all of the columns from the crew table.
 
 <img width="566" height="514" alt="Screenshot 2025-12-15 at 4 25 10 PM" src="https://github.com/user-attachments/assets/ad51ea05-f67a-481f-9c14-ec3cf28a7748" />
 
 <img width="513" height="514" alt="Screenshot 2025-12-15 at 4 25 45 PM" src="https://github.com/user-attachments/assets/3d10badb-95bc-4529-a2d3-a92d31710a6d" />
 
 
+# Chapter 4
 
+<img width="739" height="759" alt="Screenshot 2025-12-15 at 4 36 02 PM" src="https://github.com/user-attachments/assets/e8b4daa1-cfa7-4470-aa77-0de7ec4cd262" />
+
+Get all of the columns from the "crew" table where staff_name is 'Helga Sinclair'
+
+```sql
+SELECT *
+from crew
+where staff_name is  'Helga Sinclair'
+ ```
+
+This query allowed me to retrieve all of the columns from the crew table where staff_name matched 'Helga Sinclair'
+
+Filtering results with where
+
+
+<img width="727" height="378" alt="Screenshot 2025-12-15 at 4 37 10 PM" src="https://github.com/user-attachments/assets/3b2e54b7-2f6a-44c3-b045-24a4b4ee5e61" />
 
