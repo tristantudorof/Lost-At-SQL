@@ -1,0 +1,8 @@
+SELECT *
+FROM joined_crew
+WHERE last_location IS NULL
+AND NOT combined_roles like '%Transfer'
+AND (
+(NOT combined_roles like '%Injured%')
+        OR combined_roles like '%Injured%Returned%'
+    )
