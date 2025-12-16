@@ -899,3 +899,6 @@ WHERE timestamp >= '1962-06-04'
 
 
  
+# Thank You
+
+Thank you for your interest and time. Feel free to give your valuable suggestions and connect with me on [LinkedIn](https://www.linkedin.com/in/tristan-tudorof/)
