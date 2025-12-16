@@ -1,0 +1,10 @@
+SELECT *
+FROM readings
+WHERE timestamp >= '1962-06-04';
+
+
+or
+
+
+DELETE FROM readings
+WHERE timestamp >= '1962-06-04'
