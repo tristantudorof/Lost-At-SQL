@@ -1,0 +1,7 @@
+SELECT
+staff_name,
+party_status
+FROM crew
+JOIN evacuation_groups
+ON crew.pod_group = evacuation_groups.pod_group
+WHERE NOT party_status = 'boarded'
