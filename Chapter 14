@@ -1,0 +1,8 @@
+	WITH joined_crew AS (
+    SELECT *
+    FROM original_crew
+    LEFT JOIN crew on crew.staff_id = original_crew.staff_id
+)
+SELECT *
+FROM joined_crew
+WHERE last_location IS NULL;
