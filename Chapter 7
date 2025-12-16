@@ -1,0 +1,5 @@
+SELECT
+    last_location,
+    COUNT(staff_name) AS crew_count
+FROM crew
+GROUP BY last_location
