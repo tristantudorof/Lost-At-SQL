@@ -1,0 +1,6 @@
+SELECT pod_group,
+sum (weight_kg) as total_weight,
+max(distance_to_pod) as max_distance 
+from crew
+where status != 'deceased'
+GROUP BY pod_group
