@@ -1,0 +1,17 @@
+WITH grouped_changes AS (
+    SELECT
+        staff_name,
+        GROUP_CONCAT (role) as combined_roles
+    FROM staffing_changes
+    GROUP BY staff_name
+), joined_crew AS (
+    SELECT *
+    FROM    full_crew
+    FULL OUTER JOIN grouped_changes
+ON full_crew.staff_name = grouped_changes.staff_name
+)
+SELECT *
+FROM joined_crew
+WHERE last_location IS NULL
+AND NOT combined_roles like '%Transfer'
+AND NOT combined_roles like '%Injured%';
