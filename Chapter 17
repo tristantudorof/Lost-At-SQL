@@ -1,0 +1,16 @@
+	WITH found_last AS (
+    SELECT
+*,
+        ROW_NUMBER() OVER (
+                PARTITION BY depot
+                ORDER BY timestamp DESC
+        ) AS reverse_ordered
+    FROM depot_records
+)
+SELECT
+staff_name,
+staff_id,
+depot,
+timestamp
+FROM found_last
+WHERE reverse_ordered = 1;
