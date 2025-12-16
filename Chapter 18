@@ -1,0 +1,38 @@
+WITH date_to_seconds AS (
+    SELECT
+*,
+        strftime('%s', start_time) AS start_seconds,
+        strftime('%s', end_time) AS end_seconds
+    FROM phone_logs
+), calculated_duration AS (
+    SELECT
+        *,
+        end_seconds - start_seconds AS duration
+    FROM date_to_seconds
+), suspect_numbers AS (
+    SELECT phone_number
+    FROM    calculated_duration
+    WHERE incoming_outgoing = 'Incoming'
+        AND staff_id = 'mm833'
+        AND duration > 1
+), suspect_individuals AS (
+    SELECT *
+    FROM phone_logs
+    WHERE phone_number IN suspect_numbers
+	        AND staff_id IS NOT 'mm833'
+), distinct_calls AS (
+    SELECT DISTINCT
+        staff_name,
+        phone_number
+      FROM suspect_individuals
+), counted_staff as (
+    SELECT
+        *,
+        COUNT(staff_name) OVER (
+                PARTITION BY phone_number
+        ) AS staff_count
+    FROM distinct_calls
+)
+SELECT staff_name
+FROM counted_staff
+WHERE staff_count = 1;
