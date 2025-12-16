@@ -1,0 +1,5 @@
+SELECT *
+FROM pods_list 
+where status is 'functioning'
+and
+range > 1500
