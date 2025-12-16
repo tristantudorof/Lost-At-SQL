@@ -1,0 +1,116 @@
+With
+ cleaned_lift_locations_2 as (
+   SELECT
+     Timestamp,
+     lift_name,
+     REPLACE (Location, 'Deck ', '') as Location
+   FROM
+     lift_locations_2
+ )
+ -- End cleaned_lift_locations_2
+ --=========================
+ -- Combining both lift location tables into one
+ -----------------------------
+,
+ combined_locations as (
+   SELECT
+     time,
+     lift_name,
+     deck
+   FROM
+     lift_locations
+   UNION
+   SELECT
+     Timestamp,
+     lift_name,
+     Location
+   FROM
+     cleaned_lift_locations_2
+ )
+ -- End combined_locations
+ --=========================
+ -- Finding the latest locations for each lift
+ -----------------------------
+,
+ found_latest_location as (
+   SELECT
+     *,
+     ROW_NUMBER() OVER (
+       PARTITION BY
+         lift_name
+       ORDER BY
+         time DESC
+     ) as recency
+   FROM
+     combined_locations
+ )
+ -- End found_latest_location
+ --=========================
+ -- Filtering to just the most recent location for each lift
+ -----------------------------
+,
+ cleaned_lift_list as (
+   SELECT
+     lift_name,
+     deck
+   FROM
+     found_latest_location
+   WHERE
+     recency = 1
+ )
+ -- End cleaned_lift_list
+ --=========================
+ -- Categorise malfunctions as life threatening or not and noisy or not
+ -----------------------------
+,
+ categorised_issues as (
+   SELECT
+     lift_name,
+     malfunction,
+     case
+       when malfunction = 'Flooded'
+       or malfunction = 'Short circuit' then 1
+       else 0
+     end as risk_of_electrocution,
+     case
+       when malfunction = 'Broken drive shaft'
+       or malfunction = 'Loss of oxygen' then 1
+       else 0
+     end as inoperable,
+     case
+       when malfunction = 'Lubricant leak' then 1
+       else 0
+     end as noisy
+   FROM
+     lift_malfunctions
+ )
+ -- End categorised_issues
+ --=========================
+ -- Find just the lifts that are usable based on combinations of malfunctions
+ -----------------------------
+,
+ usable_lifts as (
+   SELECT
+     lift_name,
+     max(noisy) as noisy
+   FROM
+     categorised_issues
+   GROUP BY
+     lift_name
+   HAVING
+     sum(risk_of_electrocution) < 2
+     and sum(inoperable) = 0
+ )
+ -- End usable_lifts
+ --=========================
+ -- Join together the locations and malfunctions tables and filter
+ -----------------------------
+SELECT
+ cleaned_lift_list.lift_name,
+ cleaned_lift_list.deck,
+ usable_lifts.noisy
+FROM
+ cleaned_lift_list
+ JOIN usable_lifts on cleaned_lift_list.lift_name = usable_lifts.lift_name
+WHERE
+ CAST(deck as FLOAT) < 2
