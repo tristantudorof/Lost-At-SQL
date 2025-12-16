@@ -896,6 +896,7 @@ WHERE timestamp >= '1962-06-04'
 
 <img width="535" height="857" alt="Screenshot 2025-12-15 at 8 21 38 PM" src="https://github.com/user-attachments/assets/2f0f9e70-26bc-4302-85fe-62a1a9ab1c6d" />
 
+<img width="497" height="548" alt="Screenshot 2025-12-15 at 8 42 29 PM" src="https://github.com/user-attachments/assets/c117d42c-9c99-4a18-a276-93262ccc5d88" />
 
 
  
