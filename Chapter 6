@@ -1,0 +1,4 @@
+SELECT *
+From circuits
+where area is "pod 03"
+or status is NOT "green"
