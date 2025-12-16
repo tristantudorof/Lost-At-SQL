@@ -1,0 +1,9 @@
+SELECT 
+staff_name, 
+weight_kg, 
+CASE 
+WHEN weight_kg > 10 THEN weight_kg 
+ELSE weight_kg * 10 
+END AS fixed_weight 
+FROM crew 
+ORDER BY weight_kg
