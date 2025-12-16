@@ -1,0 +1,76 @@
+-- Filtering crew to just those who aren't 'deceased'
+-----------------------------
+With
+filtered_crew as (
+  /*
+  Get the name, pod group, and weights for everyone in the crew table where their status is not 'deceased'
+   */
+  SELECT
+    staff_name,
+    pod_group,
+    weight_kg
+  from
+    crew
+  where
+    status != 'deceased'
+)
+-- End filtered_crew
+--=========================
+-- Fixing the crew weight
+-----------------------------
+,
+fixed_crew as (
+  /*
+  Using the filtered_crew table - select the staff name and pod group. 
+  
+  Create a fixed_weight column which matches the weight column if the weight is over 10, otherwise multiply the weight by 10
+   */
+SELECT
+    staff_name,
+    pod_group,
+    CASE
+      WHEN weight_kg > 10 THEN weight_kg
+      ELSE weight_kg * 10
+    END AS fixed_weight
+  from
+    filtered_crew
+)
+-- End fixed_crew
+--=========================
+-- Grouping the crew based on pod_group and filtering to just those groups over the threshold
+-----------------------------
+,
+grouped_crew as (
+  /*
+  Group the fixed_crew table based on the pod group.
+  Sum the fixed weight column and call it total_weight.
+   */
+  SELECT
+    pod_group,
+    SUM(fixed_weight) AS total_weight
+  FROM
+    fixed_crew
+       GROUP BY
+    pod_group
+)
+-- End grouped_crew
+--=========================
+-- Filtering the groups to everything over 1000 and sorting from high to low
+-----------------------------
+/*
+
+Filter your grouped table to just groups where the total weight is more than 1000. 
+
+Orrder by total weight from high to low.
+ */
+SELECT
+pod_group,
+SUM(fixed_weight) AS total_weight
+FROM
+fixed_crew
+GROUP BY
+pod_group
+HAVING
+SUM(fixed_weight) > 1000
+ORDER BY
+total_weight DESC
